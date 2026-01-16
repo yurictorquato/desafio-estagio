@@ -17,7 +17,10 @@ class BaseModel(Base):
         PG_UUID(as_uuid=True), primary_key=True, default=uuid4, nullable=False
     )
     data_inclusao: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now(), nullable=False
+        DateTime(timezone=True),
+        server_default=func.now(),
+        onupdate=False,
+        nullable=False,
     )
     data_atualizacao: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),

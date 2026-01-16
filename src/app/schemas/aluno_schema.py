@@ -7,6 +7,19 @@ from pydantic import Field
 from app.schemas.base_schema import BaseSchema
 
 
+class MatriculaSimplificada(BaseSchema):
+    id: Annotated[UUID, Field(description="Identificador da matrícula")]
+    codigo_matricula: Annotated[
+        str, Field(description="Código da matrícula", examples=["RA12724219602"])
+    ]
+    nome_curso: Annotated[
+        str, Field(description="Nome do curso", examples=["Ciência da Computação"])
+    ]
+    data_inicio: Annotated[
+        datetime, Field(description="Data de início", examples=["04/02/2026"])
+    ]
+
+
 class AlunoRequest(BaseSchema):
     nome: Annotated[
         str,
@@ -29,8 +42,27 @@ class AlunoRequest(BaseSchema):
     ]
 
 
-class AlunoResponse(AlunoRequest):
+class AlunoResponse(BaseSchema):
     id: Annotated[UUID, Field(description="Identificador do aluno")]
+    nome: Annotated[
+        str,
+        Field(
+            description="Nome do aluno", examples=["Yuri Cruz Torquato"], max_length=50
+        ),
+    ]
+    telefone: Annotated[
+        str,
+        Field(
+            description="Telefone de contato do aluno",
+            examples=["71982580127"],
+            min_length=11,
+            max_length=11,
+        ),
+    ]
+    data_nascimento: Annotated[
+        datetime,
+        Field(description="Data de nascimento do aluno", examples=["11/04/2000"]),
+    ]
     data_inclusao: Annotated[
         datetime,
         Field(
@@ -44,6 +76,10 @@ class AlunoResponse(AlunoRequest):
             examples=["10/12/2025"],
         ),
     ]
+    matriculas: Annotated[
+        list[MatriculaSimplificada],
+        Field(description="Lista de matrículas do aluno", default_factory=list),
+    ] = []
 
 
 class AlunoUpdate(BaseSchema):

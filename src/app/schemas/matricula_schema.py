@@ -17,10 +17,31 @@ class MatriculaRequest(BaseSchema):
     data_inicio: Annotated[
         datetime, Field(description="Data de início", examples=["04/02/2026"])
     ]
+    aluno_id: Annotated[
+        UUID,
+        Field(
+            description="Identificador do aluno a ser matriculado", examples=["RA12724219602"]
+        ),
+    ]
 
 
-class MatriculaResponse(MatriculaRequest):
+class MatriculaResponse(BaseSchema):
     id: Annotated[UUID, Field(description="Identificador da matrícula")]
+    codigo_matricula: Annotated[
+        str, Field(description="Código da matrícula", examples=["RA12724219602"])
+    ]
+    nome_curso: Annotated[
+        str, Field(description="Nome do curso", examples=["Ciência da Computação"])
+    ]
+    data_inicio: Annotated[
+        datetime, Field(description="Data de início", examples=["04/02/2026"])
+    ]
+    aluno_id: Annotated[
+        UUID,
+        Field(
+            description="Identificador do aluno a ser matriculado", examples=["RA12724219602"]
+        ),
+    ]
     data_inclusao: Annotated[
         datetime,
         Field(
