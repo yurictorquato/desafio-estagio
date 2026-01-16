@@ -1,0 +1,13 @@
+[project]
+name = "desafio-estagio"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi[standard]>=0.128.0",
+    "pydantic>=2.12.5",
+    "pyrefly>=0.48.1",
+    "ruff>=0.14.13",
+    "sqlalchemy>=2.0.45",
+    "uvicorn>=0.40.0",
+]
